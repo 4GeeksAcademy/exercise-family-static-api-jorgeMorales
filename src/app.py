@@ -40,6 +40,8 @@ def post_member():
     body = request.get_json(silent=True)
     if body is None:
         return jsonify({'msg': 'Debes enviar información en el body'}), 400
+    if 'id' not in body:
+        return jsonify({'msg': 'El campop id es ibligatorio'}), 400
     if 'first_name' not in body:
         return jsonify({'msg': 'El campo first_name es obliatorio'}), 400
     if 'age' not in body:
@@ -47,7 +49,7 @@ def post_member():
     if 'lucky_numbers' not in body:
         return jsonify({'msg': 'El campo lucky_numbers es obligatorio'}), 400
     new_member = {
-                'id': jackson_family._generateId(),
+                'id': body['id'],
                 'first_name': body['first_name'],
                 'last_name': jackson_family.last_name,
                 'age': body['age'],
@@ -57,9 +59,9 @@ def post_member():
     return jsonify({'msg': 'OK', 'members': members })
 
 
-@app.route('/member/<int:member_id>', methods=['GET'])
-def get_member(member_id):
-    member = jackson_family.get_member(member_id)
+@app.route('/member/<int:id>', methods=['GET'])
+def get_single_member(id):
+    member = jackson_family.get_member(id)
     if member is None:
         return jsonify({'msg': 'Miembro no encontrado'}), 404
     return jsonify(member), 200

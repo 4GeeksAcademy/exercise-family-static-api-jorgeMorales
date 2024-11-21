@@ -58,8 +58,8 @@ class FamilyStructure:
                     'id': member["id"],
                     'first_name': member["first_name"],
                     'last_name': member["last_name"],
-                    'age': member["age"],
-                    'lucky_numbers': member["luck_numbers"]
+                    'age': int(member["age"]),
+                    'lucky_numbers': member["lucky_numbers"]
                 }
         return None
         pass
