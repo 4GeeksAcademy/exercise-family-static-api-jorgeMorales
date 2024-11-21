@@ -66,9 +66,9 @@ def get_single_member(id):
         return jsonify({'msg': 'Miembro no encontrado'}), 404
     return jsonify(member), 200
 
-@app.route('/member/<int:member_id>', methods=['DELETE'])
-def delete_member(member_id):
-    succes = jackson_family.delete_member(member_id)
+@app.route('/member/<int:id>', methods=['DELETE'])
+def delete_member(id):
+    succes = jackson_family.delete_member(id)
     if not succes:
         return jsonify({'msg': 'Miembro no encontrado'}), 404
     return jsonify({'done': True}), 200
